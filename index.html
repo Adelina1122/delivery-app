@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тамак-аш жеткирүү</title>
+    <!-- Телеграмдын скриптин туташтыруу -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; padding: 15px; margin: 0; }
+        h2 { text-align: center; color: #333; margin-bottom: 20px; }
+        .card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .info { display: flex; flex-direction: column; }
+        .name { font-weight: bold; font-size: 1.1em; color: #2c3e50; }
+        .price { font-weight: bold; color: #27ae60; margin-top: 5px; }
+        button.add-btn { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        button.add-btn:active { transform: scale(0.95); background: #219150; }
+        .order-btn { width: 100%; padding: 18px; background: #3498db; color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; margin-top: 25px; display: none; cursor: pointer; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); }
+    </style>
+</head>
+<body>
+    <h2>Тамак-аш Менюсу</h2>
+    
+    <div class="card">
+        <div class="info">
+            <span class="name">Ташкент ашы (Плов)</span>
+            <span class="price">350с</span>
+        </div>
+        <button class="add-btn" onclick="add(350, 'Плов')">Кошуу</button>
+    </div>
+
+    <div class="card">
+        <div class="info">
+            <span class="name">Куурулган Лагман</span>
+            <span class="price">300с</span>
+        </div>
+        <button class="add-btn" onclick="add(300, 'Лагман')">Кошуу</button>
+    </div>
+
+    <div class="card">
+        <div class="info">
+            <span class="name">Лимон чайы</span>
+            <span class="price">80с</span>
+        </div>
+        <button class="add-btn" onclick="add(80, 'Чай')">Кошуу</button>
+    </div>
+
+    <!-- Заказ берүүчү негизги баскыч -->
+    <button id="mainBtn" class="order-btn" onclick="sendData()">Заказды тариздөө: 0с</button>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // Тиркемени толук экранга жаюу
+        
+        let total = 0;
+        let items = [];
+
+        function add(price, name) {
+            total += price;
+            items.push(name);
+            let btn = document.getElementById('mainBtn');
+            btn.style.display = 'block';
+            btn.innerText = `Заказды тариздөө: ${total}с`;
+        }
+
+        function sendData() {
+            let data = {
+                total_price: total,
+                goods: items.join(", ")
+            };
+            // Маалыматты ботко жөнөтүү
+            tg.sendData(JSON.stringify(data)); 
+            // Тиркемени жабуу
+            tg.close();
+        }
+    </script>
+</body>
+</html>
