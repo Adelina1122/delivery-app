@@ -29,9 +29,9 @@
         <h2>🚚 Food Express KG</h2>
     </div>
 
-    <!-- Тамактар -->
+    <!-- Тамактардын тизмеси -->
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200" class="food-img">
+        <img src="https://img.povar.ru/main/6d/4d/93/8a/plov_po-tashkentski-431871.jpg" class="food-img">
         <div class="info">
             <span class="name">Ташкент ашы</span>
             <span class="price">350с</span>
@@ -40,12 +40,22 @@
     </div>
 
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200" class="food-img">
+        <img src="https://recepti.kz/uploads/posts/2019-12/1575304677_uygurskiy-tsoy-guiru-lagman.jpg" class="food-img">
         <div class="info">
             <span class="name">Куурулган Лагман</span>
             <span class="price">300с</span>
         </div>
         <button class="add-btn" onclick="add(300, 'Лагман')">Кошуу</button>
+    </div>
+
+    <!-- Жаңы кошулган Бешбармак -->
+    <div class="card">
+        <img src="https://st-1.akipress.org/st_bilim/1/1161100101.1.jpg" class="food-img">
+        <div class="info">
+            <span class="name">Кыргызча Бешбармак</span>
+            <span class="price">600с</span>
+        </div>
+        <button class="add-btn" onclick="add(600, 'Бешбармак')">Кошуу</button>
     </div>
 
     <div class="address-section">
@@ -69,8 +79,8 @@
             items.push(name);
             let btn = document.getElementById('mainBtn');
             btn.style.display = 'block';
-            btn.innerText = `Заказды тариздөө: ${total}с`;
-            tg.HapticFeedback.impactOccurred('medium'); // Вибрация при нажатии
+            btn.innerText = `Буйрутманы тариздөө: ${total}с`;
+            tg.HapticFeedback.impactOccurred('medium'); 
         }
 
         function sendData() {
@@ -86,14 +96,13 @@
                 address: addr
             };
 
-            // Имитация отслеживания перед закрытием
             document.getElementById('status').style.display = 'block';
             document.getElementById('mainBtn').style.display = 'none';
 
             setTimeout(() => {
                 tg.sendData(JSON.stringify(data));
                 tg.close();
-            }, 2000); // Закроется через 2 секунды после "отправки"
+            }, 2000); 
         }
     </script>
 </body>
