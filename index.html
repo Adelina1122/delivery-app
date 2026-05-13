@@ -7,8 +7,20 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root { --tg-theme-button-color: #27ae60; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding: 15px; margin: 0; color: #333; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding: 15px; margin: 0; color: #333; padding-bottom: 100px; }
         .header { text-align: center; padding: 10px 0; border-bottom: 2px solid #eee; margin-bottom: 20px; }
+        
+        /* Бөлүмдөрдүн стили */
+        .category-title { 
+            font-size: 1.2em; 
+            font-weight: bold; 
+            margin: 20px 0 10px 5px; 
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        .category-title span { margin-right: 10px; }
+
         .card { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; padding: 10px; }
         .food-img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; margin-right: 15px; background: #f0f0f0; flex-shrink: 0; }
         .info { flex-grow: 1; }
@@ -20,7 +32,15 @@
         input { width: 100%; padding: 12px; margin-top: 8px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
         
         .status-badge { display: none; text-align: center; padding: 15px; background: #e3f2fd; border-radius: 10px; color: #1976d2; margin-top: 15px; font-weight: bold; border: 1px dashed #1976d2; }
-        .order-btn { width: 100%; padding: 18px; background: #3498db; color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; margin-top: 20px; display: none; }
+        
+        /* Төмөнкү заказ берүү баскычы ар дайым көрүнүп турат */
+        .order-btn { 
+            position: fixed; bottom: 20px; left: 15px; right: 15px;
+            padding: 18px; background: #3498db; color: white; border: none; 
+            border-radius: 12px; font-size: 18px; font-weight: bold; 
+            display: none; box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
@@ -28,7 +48,21 @@
         <h2>🚚 Food Express KG</h2>
     </div>
 
-    <!-- Ташкент ашы -->
+    <!-- БИРИНЧИ ТАМАКТАР -->
+    <div class="category-title"><span>🍲</span> Биринчи тамактар</div>
+    
+    <div class="card">
+        <img src="https://img.povar.ru/mobile/a5/11/49/9f/shorpo-409463.jpg" class="food-img" alt="Шорпо">
+        <div class="info">
+            <span class="name">Шорпо (Мясо баранины)</span>
+            <span class="price">280с</span>
+        </div>
+        <button class="add-btn" onclick="add(280, 'Шорпо')">Кошуу</button>
+    </div>
+
+    <!-- ЭКИНЧИ ТАМАКТАР -->
+    <div class="category-title"><span>🍽️</span> Экинчи тамактар</div>
+
     <div class="card">
         <img src="https://images.gastronom.ru/ZO9exaYXRRPnNhBAJavx9aIk6D4SMrp77yBr1GYKvOo/pr:content-group-cover-image/g:ce/rs:auto:0:0:0/L2Ntcy9hbGwtaW1hZ2VzL2U3ODk0OGExLWE0ZjQtNGRjNS1hZjNiLTQ2MmNhMmY5ODgyNi5qcGc.webp" class="food-img" alt="Плов">
         <div class="info">
@@ -38,7 +72,6 @@
         <button class="add-btn" onclick="add(350, 'Плов')">Кошуу</button>
     </div>
 
-    <!-- Куурулган Лагман -->
     <div class="card">
         <img src="https://i.ytimg.com/vi/u1h1SMO8HiU/sddefault.jpg" class="food-img" alt="Лагман">
         <div class="info">
@@ -48,7 +81,6 @@
         <button class="add-btn" onclick="add(300, 'Лагман')">Кошуу</button>
     </div>
 
-    <!-- Бешбармак -->
     <div class="card">
         <img src="https://img.iamcook.ru/2025/upl/recipes/cat/u-52cad7268ed77645060900d25872417b.jpg" class="food-img" alt="Бешбармак">
         <div class="info">
@@ -58,7 +90,21 @@
         <button class="add-btn" onclick="add(600, 'Бешбармак')">Кошуу</button>
     </div>
 
-    <!-- Лимон чайы -->
+    <!-- ДЕСЕРТТЕР -->
+    <div class="category-title"><span>🍰</span> Десерттер</div>
+    
+    <div class="card">
+        <img src="https://www.povarenok.ru/data/cache/2020sep/19/49/2767934_92959-710x550x.jpg" class="food-img" alt="Медовик">
+        <div class="info">
+            <span class="name">Медовик (Классикалык)</span>
+            <span class="price">150с</span>
+        </div>
+        <button class="add-btn" onclick="add(150, 'Медовик')">Кошуу</button>
+    </div>
+
+    <!-- СУУСУНДУКТАР -->
+    <div class="category-title"><span>☕</span> Суусундуктар</div>
+
     <div class="card">
         <img src="https://azertag.az/files/2021/1/1200x630/16114106574667152710_1200x630.jpg" class="food-img" alt="Чай">
         <div class="info">
@@ -68,6 +114,7 @@
         <button class="add-btn" onclick="add(80, 'Чай')">Кошуу</button>
     </div>
 
+    <!-- ДАРЕК ЖАНА БУЙРУТМА -->
     <div class="address-section">
         <strong>Жеткирүү дареги:</strong>
         <input type="text" id="address" placeholder="Мисалы: Тынчтык пр. 10, кв 5">
